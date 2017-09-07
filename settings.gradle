@@ -1,0 +1,6 @@
+rootProject.name='wechat-order'
+include 'eureka-server'
+include 'turbine'
+include 'config-server'
+include 'api-gateway-zuul'
+include 'zipkin'

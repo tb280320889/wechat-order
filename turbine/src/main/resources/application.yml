@@ -1,0 +1,17 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  application:
+    name: wechat-order-hystrix-turbine
+server:
+  port: 8031
+security:
+  basic:
+    enabled: false
+eureka:
+  client:
+    service-url: http://wechat-order-discovery:8761/eureka/
+turbine:
+  app-config:
+  cluster-name-expression:

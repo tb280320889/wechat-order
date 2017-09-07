@@ -1,0 +1,18 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+server:
+  port: 8050
+eureka:
+  instance:
+    hostname: wechat-order-gateway
+  client:
+    service-url:
+     defaultZone: http://wechat-order-discovery:8761/eureka/
+# 下⾯整个树都⾮必须， 如果不配置， 将默认使⽤ http://GATEWAY:GATEWAY_PORT/想要访问的Eureka服务id的⼩写/** 路由到： http://想要访问的Eureka服务id的⼩写:该服务端⼝/**
+zuul:
+ routes:
+   user: # 可以随便写， 在zuul上⾯唯⼀即可； 当这⾥的值 = service-id时， service-id可以不写。
+    path: /user/** # 想要映射到的路径
+    service-id: microservice-provider-user # Eureka中的serviceId
