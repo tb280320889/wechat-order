@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate
 import java.sql.Timestamp
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 /**
@@ -16,28 +17,31 @@ import javax.persistence.Id
 @DynamicUpdate
 class ProductCategory {
 
-    /**
-     *
-     */
-    @Id
-    @GeneratedValue
-    var categoryId: Int? = null
+  /**
+   *
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  var categoryId: Int? = null
 
-    /**
-     *
-     */
-    var categoryName: String? = null
-    /**
-     *
-     */
-    var categoryType: Int? = null
-    /**
-     *
-     */
-    var createTime: Timestamp? = null
-    /**
-     *
-     */
-    var updateTime: Timestamp? = null
+  /**
+   *
+   */
+  var categoryName: String? = null
+  /**
+   *
+   */
+  var categoryType: Int? = null
+  /**
+   *
+   */
+  var createTime: Timestamp? = null
+  /**
+   *
+   */
+  var updateTime: Timestamp? = null
+
+  override fun toString(): String =
+      "ProductCategory(categoryId=$categoryId, categoryName=$categoryName, categoryType=$categoryType, createTime=$createTime, updateTime=$updateTime)"
 
 }
