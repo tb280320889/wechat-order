@@ -9,45 +9,21 @@ import javax.persistence.Id
  */
 
 @Entity
-class ProductInfo {
-  /**
-   *
-   */
-  @Id
-  var productId: String? = null
+class ProductInfo(
+    @Id
+    var productId: String? = null,
+    var productName: String? = null,
+    var productPrice: BigDecimal? = null,
+    var productStock: Int? = null,
+    var productDescription: String? = null,
+    var productIcon: String? = null,
+    var productStatus: Int = ProductStatusEnum.AVAILABLE.code,
+    var categoryType: Int? = null
+) {
+  enum class ProductStatusEnum(val code: Int, val message: String) {
 
-  /**
-   *
-   */
-  var productName: String? = null
-  /**
-   *
-   */
-  var productPrice: BigDecimal? = null
-  /**
-   *
-   */
-  var productStock: Int? = null
-  /**
-   *
-   */
-  var productDescription: String? = null
-  /**
-   *
-   */
-  var productIcon: String? = null
-  /**
-   *
-   */
-  var productStatus: Int? = null
-  /**
-   *
-   */
-  var categoryType: Int? = null
+    AVAILABLE(0, "available"),
+    PENDING(1, "pending")
 
-
-  override fun toString(): String =
-      "ProductInfo(productId=$productId, productName=$productName, productPrice=$productPrice, productStock=$productStock, productDescription=$productDescription, productIcon=$productIcon, productStatus=$productStatus, categoryType=$categoryType)"
-
-
+  }
 }

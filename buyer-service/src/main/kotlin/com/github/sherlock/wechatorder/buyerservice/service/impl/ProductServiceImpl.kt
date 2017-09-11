@@ -1,7 +1,6 @@
 package com.github.sherlock.wechatorder.buyerservice.service.impl
 
 import com.github.sherlock.wechatorder.buyerservice.domain.ProductInfo
-import com.github.sherlock.wechatorder.buyerservice.enums.ProductStatusEnum
 import com.github.sherlock.wechatorder.buyerservice.repository.ProductInfoRepository
 import com.github.sherlock.wechatorder.buyerservice.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +20,7 @@ class ProductServiceImpl @Autowired constructor(
   }
 
   override fun findUpAll(): List<ProductInfo> =
-      productInfoRepository.findByProductStatus(ProductStatusEnum.ON_SHELF.code)
+      productInfoRepository.findByProductStatus(ProductInfo.ProductStatusEnum.AVAILABLE.code)
 
   override fun findAll(pageable: Pageable): Page<ProductInfo> =
       productInfoRepository.findAll(pageable)

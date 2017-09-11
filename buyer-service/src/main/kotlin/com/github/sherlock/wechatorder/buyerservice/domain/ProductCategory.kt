@@ -10,38 +10,17 @@ import javax.persistence.Id
 
 /**
  * Created by TangBin on 2017/9/10.
+ *
  */
-
 
 @Entity
 @DynamicUpdate
-class ProductCategory {
-
-  /**
-   *
-   */
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  var categoryId: Int? = null
-
-  /**
-   *
-   */
-  var categoryName: String? = null
-  /**
-   *
-   */
-  var categoryType: Int? = null
-  /**
-   *
-   */
-  var createTime: Timestamp? = null
-  /**
-   *
-   */
-  var updateTime: Timestamp? = null
-
-  override fun toString(): String =
-      "ProductCategory(categoryId=$categoryId, categoryName=$categoryName, categoryType=$categoryType, createTime=$createTime, updateTime=$updateTime)"
-
-}
+data class ProductCategory(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var categoryId: Int? = null,
+    var categoryName: String? = null,
+    var categoryType: Int? = null,
+    var createTime: Timestamp? = null,
+    var updateTime: Timestamp? = null
+)

@@ -4,7 +4,6 @@ package com.github.sherlock.wechatorder.buyerservice.service.impl
  * Created by TangBin on 2017/9/11.
  */
 import com.github.sherlock.wechatorder.buyerservice.domain.ProductInfo
-import com.github.sherlock.wechatorder.buyerservice.enums.ProductStatusEnum
 import com.github.sherlock.wechatorder.buyerservice.service.ProductService
 import org.jetbrains.kotlin.jline.internal.Log.info
 import org.junit.Assert.assertEquals
@@ -53,7 +52,7 @@ class ProductServiceImplTest {
       productStock = 100
       productDescription = "nice soup!"
       productIcon = "http://xxxx.jpg"
-      productStatus = ProductStatusEnum.OFF_SHELF.code
+      productStatus = ProductInfo.ProductStatusEnum.PENDING.code
 
 
       val save = productService.save(this)
