@@ -1,169 +1,5 @@
 openapi: 3.0.0
 info:
-  $ref: '#/defs-info'
-servers:
-  $ref: '#/defs-server'
-paths:
-  /buyer/products:
-    $ref: '#/defs-paths/buyer-products-get'
-  '/buyer/orders/{orderId}':
-    $ref: '#/defs-paths/buyer-orders-orderId-get'
-defs-paths:
-  buyer-products-get:
-    get:
-      summary: return list of all products
-      responses:
-        '200':
-          description: all products being returned
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  $ref: '#/defs-common/respones-code-msg'
-                  $ref2: '#/defs-entity/product-vo'
-  buyer-orders-orderId-get:
-    get:
-      summary: return an order detail
-      parameters:
-        - name: orderId
-          in: path
-          required: true
-          description: id of a product
-          schema:
-            type: string
-        - name: openid
-          description: user's openid from wechat
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: an order detail
-          content:
-            application/json:
-              schema:
-                $ref: '#/defs-entity/order-vo'
-defs-common:
-  respones-code-msg:
-    code:
-      type: integer
-      format: int32
-      example: 0
-    msg:
-      type: string
-      example: success
-defs-entity:
-  product-vo:
-    data:
-      type: array
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            example: hot
-          type:
-            type: integer
-            format: int32
-            example: 1
-          foods:
-            type: array
-            items:
-              properties:
-                id:
-                  type: string
-                  example: 123456
-                name:
-                  type: string
-                  example: omelet
-                price:
-                  type: number
-                  format: double
-                  example: 1.2
-                description:
-                  type: string
-                example: nice breakfast
-                icon:
-                  type: string
-                  example: 'http://xxx.jpg'
-  order-detail-vo:
-    type: object
-    properties:
-      detailId:
-        type: string
-        example: 161899085974995840
-      orderId:
-        type: string
-        example: 161899085773669380
-      productId:
-        type: string
-        example: 157875196362360030
-      productName:
-        type: string
-        example: omelet
-      productPrice:
-        type: number
-        format: double
-        example: 9
-      productQuantity:
-        type: integer
-        format: int32
-        example: 2
-      productIcon:
-        type: string
-        example: 'http://xxx.com'
-      productImage:
-        type: string
-        example: 'http://xxx.com'
-  order-vo:
-    type: object
-    properties:
-      $ref: '#/defs-common/respones-code-msg'
-      data:
-        type: object
-        properties:
-          orderId:
-            type: string
-            example: 161899085773669380
-          buyerName:
-            type: string
-            example: sherlock
-          buyerPhone:
-            type: string
-            example: 8615927373770
-          buyerAddress:
-            type: string
-            example: 'Wuhan,China'
-          buyerOpenid:
-            type: string
-            example: 18eu2jwk2kse3r42e2e
-          orderAmount:
-            type: integer
-            format: int32
-            example: 23
-          orderStatus:
-            type: integer
-            format: int32
-            example: 0
-          payStatus:
-            type: integer
-            format: int32
-            example: 0
-          createTime:
-            type: integer
-            format: int32
-            example: 1490177352
-          updateTime:
-            type: integer
-            format: int32
-            example: 1490177352
-          orderDetailList:
-            type: array
-            items:
-              $ref: '#/defs-entity/order-detail-vo'
-defs-info:
   title: Wechat order api
   description: wechat order api
   version: 0.0.1-snapshot
@@ -175,7 +11,7 @@ defs-info:
     name: Sherlock Tang
     url: 'https://github.com/tb280320889'
     email: 280320889@qq.com
-defs-server:
+servers:
   - url: 'http://winter-glitter-4840.getsandbox.com'
     description: no formal website yet
     variables:
@@ -184,10 +20,92 @@ defs-server:
         description: demo description
       port:
         enum:
-          - '8443'
+          - '8080'
           - '443'
-        default: '8443'
+        default: '8080'
       basePath:
         default: wechat-order
   - url: 'https://github.com/tb280320889'
     description: free sandbox website for testing API
+paths:
+  /buyer/products:
+    get:
+      summary: return all categories and their products
+      description: return all categories and their products
+      responses:
+        '200':
+          $ref: '#/components/responses/getBuyerProducts'
+components:
+  responses:
+    getBuyerProducts:
+      description: response for get -> buyer/products
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/responesCodeMsg'
+  schemas:
+    responesCodeMsg:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 0
+        msg:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/categoryProducts'
+    categoryProducts:
+      type: object
+      properties:
+        name:
+          type: string
+          example: category 1
+        type:
+          type: integer
+          format: int32
+          example: 1
+        foods:
+          type: array
+          items:
+            $ref: '#/components/schemas/productVo'
+    productVo:
+      description: basic information about one product
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: double
+          minimum: 0.01
+        description:
+          type: string
+        icon:
+          type: string
+        example:
+          $ref: '#/components/examples/productVo'
+  examples:
+    productVo:
+      value:
+        id: '123456'
+        name: omelet
+        price: 1.2
+        description: nice breakfast
+        icon: 'http://xxxx.jpg'
+  securitySchemes:
+    wechatOAuth2Login:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
+          tokenUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+          refreshUrl: https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+          scopes:
+            write:products: modify products
+            read:products: view products

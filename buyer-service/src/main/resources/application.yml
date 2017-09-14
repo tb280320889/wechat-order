@@ -9,3 +9,16 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://192.168.1.9:3306/wechat_order?characterEncoding=utf-8&useSSL=false
+  redis:
+    host: 192.168.1.9
+    port: 6379
+    password:
+server:
+  servlet:
+    context-path: /wechat-order
+
+
+projectUrl:
+  weChatWpAuthorize: https//localhost/
+  weChatOpenAuthorize: http://localhost/
+  sellUrl: http://localhost/

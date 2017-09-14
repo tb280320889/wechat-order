@@ -32,7 +32,7 @@ class ProductServiceImplTest {
 
   @Test
   fun findUpAll() {
-    val productInfoList = productService.findUpAll()
+    val productInfoList = productService.findAvailableAll()
     assertNotEquals(productInfoList.size, 0)
   }
 

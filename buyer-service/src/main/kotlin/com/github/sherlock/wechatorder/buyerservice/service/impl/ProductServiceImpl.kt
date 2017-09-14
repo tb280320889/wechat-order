@@ -19,7 +19,7 @@ class ProductServiceImpl @Autowired constructor(
     return if (optional.isPresent) optional.get() else null
   }
 
-  override fun findUpAll(): List<ProductInfo> =
+  override fun findAvailableAll(): List<ProductInfo> =
       productInfoRepository.findByProductStatus(ProductInfo.ProductStatusEnum.AVAILABLE.code)
 
   override fun findAll(pageable: Pageable): Page<ProductInfo> =

@@ -12,14 +12,9 @@ interface ProductService {
 
   fun findById(productId : String ): ProductInfo?
 
-  fun findUpAll() : List<ProductInfo>
+  fun findAvailableAll() : List<ProductInfo>
 
   fun findAll(pageable: Pageable): Page<ProductInfo>
 
   fun save(productInfo: ProductInfo):ProductInfo
-
-  //TODO increase stock
-
-  //TODO decrease stock
-
 }

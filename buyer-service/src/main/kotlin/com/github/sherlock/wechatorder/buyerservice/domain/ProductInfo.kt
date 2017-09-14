@@ -1,5 +1,6 @@
 package com.github.sherlock.wechatorder.buyerservice.domain
 
+import com.github.sherlock.wechatorder.buyerservice.vo.ProductVO
 import java.math.BigDecimal
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -20,6 +21,20 @@ class ProductInfo(
     var productStatus: Int = ProductStatusEnum.AVAILABLE.code,
     var categoryType: Int? = null
 ) {
+
+  fun toProductVO(): ProductVO {
+    val productVO = ProductVO()
+//  BeanUtils.copyProperties(this, productVO)
+
+    productVO.productDescription = this.productDescription
+    productVO.productIcon = this.productIcon
+    productVO.productId = this.productId
+    productVO.productName = this.productName
+    productVO.productPrice = this.productPrice
+
+    return productVO
+  }
+
   enum class ProductStatusEnum(val code: Int, val message: String) {
 
     AVAILABLE(0, "available"),

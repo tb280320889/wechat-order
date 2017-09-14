@@ -24,18 +24,23 @@ class ProductInfoRepositoryTest {
   @Test
   fun `should save`() {
 
-    with(ProductInfo()) {
-      productId = "123456"
-      productName = "omelet"
-      productPrice = BigDecimal(3.2)
-      productDescription = "nice for breakfast"
-      productStock = 233
-      productIcon = "http://xxx.jpg"
-      productStatus = 0
-      categoryType = 1
-      val save = productInfoRepository.save(this)
-      assertNotNull(save)
+    val list: List<ProductInfo> = (0..30).map {
+      val productInfo = ProductInfo()
+      with(productInfo) {
+        productId = (it * 100).toString()
+        productName = (it * 10).toString() + "name"
+        productPrice = BigDecimal(it + 0.01)
+        productDescription = "description" + it
+        productStock = it
+        productIcon = "http://xxx$it.jpg"
+        productStatus = it.rem(2)
+        categoryType = it.rem(5)
+      }
+      productInfo
     }
+
+    val save = productInfoRepository.saveAll(list)
+    assertNotNull(save)
 
   }
 
