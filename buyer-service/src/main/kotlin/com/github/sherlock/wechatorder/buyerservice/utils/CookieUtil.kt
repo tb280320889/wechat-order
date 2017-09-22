@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse
 
 object CookieUtil {
 
-  fun set(response: HttpServletResponse, name: String, value: String, maxAge: Int) {
+  fun set(response: HttpServletResponse, name: String, value: String?, maxAge: Int) {
     val cookie = Cookie(name, value)
     cookie.path = "/"
     cookie.maxAge = maxAge

@@ -28,10 +28,10 @@ class BuyerServiceAuthorizeAspect @Autowired constructor(
 
   @Pointcut("execution(public * com.github.sherlock.wechatorder.buyerservice.controller*.*(..)) ")
   fun verify() {
-
   }
 
   @Before("verify()")
+  @Throws(BuyerServiceAuthorizationException::class)
   fun doVerify() {
 
     val attributes = RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes
