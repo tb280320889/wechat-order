@@ -1,16 +1,21 @@
 spring:
   application:
-    name: wechat-order-discovery-server-ha8762
+    name: wechat-order-discovery-server-ha8761
   output:
     ansi:
       enabled: always
 server:
-  port: 8762
+  port: 8761
 eureka:
   instance:
-    hostname: wechat-order-discovery-server-ha8762
+    hostname: wechat-order-discovery-server-ha8761
     prefer-ip-address: true
   client:
     service-url:
         defaultZone: http://sherlock:sherlock@wechat-order-discovery-server-ha8762:8762/eureka/
-    eureka-server-u-r-l-context: http://wechat-order-discovery-server-ha:8760/
+security:
+  basic:
+    enabled: true
+  user:
+    name: sherlock
+    password: sherlock

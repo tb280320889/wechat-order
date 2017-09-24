@@ -6,4 +6,5 @@ include 'api-gateway-zuul'
 include 'zipkin'
 include 'buyer-service'
 include 'jpa-demo'
+include 'eureka-server-ha'
 

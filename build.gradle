@@ -1,8 +1,10 @@
 buildscript {
 
     ext {
+//        kotlinVersion = '1.2-M2'
         kotlinVersion = '1.1.4-3'
-        springBootVersion = '2.0.0.M4'
+        springBootVersion = '2.0.0.M3'
+//        springBootVersion = '2.0.0.M4'  has some issues in @ConfigurationProperties kotlin
     }
     repositories {
         mavenLocal()
@@ -16,6 +18,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+
     }
 }
 
@@ -56,10 +59,12 @@ subprojects {
         compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
         compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
         compile("org.projectlombok:lombok")
-        runtime('org.springframework.boot:spring-boot-devtools')
+//        runtime('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.boot:spring-boot-starter-actuator')
         testCompile('org.springframework.boot:spring-boot-starter-test')
         testCompile('org.springframework.security:spring-security-test')
-//        compile('org.springframework.boot:spring-boot-starter-actuator')
+        compile "org.springframework.boot:spring-boot-configuration-processor"
+
 //        compile('org.springframework.boot:spring-boot-starter-aop')
 //        compile('org.springframework.boot:spring-boot-starter-cache')
 //        compile('org.springframework.cloud:spring-cloud-starter-config')
@@ -79,6 +84,8 @@ subprojects {
 //        runtime('io.zipkin.java:zipkin-autoconfigure-ui')
 //        compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     }
+
+    compileJava.dependsOn(processResources)
 
     dependencyManagement {
         imports {

@@ -42,9 +42,9 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/responesCodeMsg'
+            $ref: '#/components/schemas/responseCodeMsg'
   schemas:
-    responesCodeMsg:
+    responseCodeMsg:
       type: object
       properties:
         code:

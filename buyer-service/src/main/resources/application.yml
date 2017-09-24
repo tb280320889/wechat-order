@@ -8,17 +8,36 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.1.9:3306/wechat_order?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.1.7:3306/wechat_order?characterEncoding=utf-8&useSSL=false
   redis:
-    host: 192.168.1.9
+    host: 192.168.1.7
     port: 6379
     password:
+  application:
+    name: wechat-order-buyer-service
+####################################
 server:
   servlet:
     context-path: /wechat-order
+  port: 8010
 
-
-projectUrl:
+projecturl:
   weChatWpAuthorize: https//localhost/
   weChatOpenAuthorize: http://localhost/
   sellUrl: http://localhost/
+
+
+
+info:
+    app:
+        name: ${project.artifactId}
+        encoding: ${project.build.sourceEncoding}
+        java:
+            source: ${java.version}
+            target: ${java.version}
+eureka:
+  client:
+    service-url: http://wechat-order-discovery-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
