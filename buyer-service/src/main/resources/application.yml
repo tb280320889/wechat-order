@@ -37,7 +37,9 @@ info:
             target: ${java.version}
 eureka:
   client:
-    service-url: http://wechat-order-discovery-server:8761/eureka/
+    service-url:
+        defaultZone: http://sherlock:sherlock@wechat-order-discovery-server-ha8761:8761/eureka/
   instance:
     prefer-ip-address: true
+    hostname: wechat-order-buyer-service
 

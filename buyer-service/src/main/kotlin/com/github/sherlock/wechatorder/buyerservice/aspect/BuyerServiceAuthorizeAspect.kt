@@ -27,8 +27,7 @@ class BuyerServiceAuthorizeAspect @Autowired constructor(
 ) {
 
   @Pointcut("execution(public * com.github.sherlock.wechatorder.buyerservice.controller*.*(..)) ")
-  fun verify() {
-  }
+  fun verify() {}
 
   @Before("verify()")
   @Throws(BuyerServiceAuthorizationException::class)
@@ -57,3 +56,4 @@ class BuyerServiceAuthorizeAspect @Autowired constructor(
   }
 
 }
+

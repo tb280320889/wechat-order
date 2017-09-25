@@ -12,5 +12,5 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-        defaultZone: http://sherlock:sherlock@wechat-order-discovery-server-ha8762:8762/eureka/
+        defaultZone: http://sherlock:sherlock@wechat-order-discovery-server-ha8761:8761/eureka/
     eureka-server-u-r-l-context: http://wechat-order-discovery-server-ha:8760/
